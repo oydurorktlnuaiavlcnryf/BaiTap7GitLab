@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Management Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Student Dashboard</h1>
+      <button id="themeToggle" type="button" class="btn">Toggle theme</button>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Thêm sinh viên</h2>
+        <form id="studentForm" class="grid" autocomplete="off">
+          <label>
+            Mã SV
+            <input id="studentId" required placeholder="VD: SV001" />
+          </label>
+          <label>
+            Họ tên
+            <input id="studentName" required placeholder="VD: Nguyen Van A" />
+          </label>
+          <label>
+            Lớp
+            <input id="studentClass" required placeholder="VD: D21CQCN01" />
+          </label>
+          <label>
+            Điểm (0-10)
+            <input id="studentScore" type="number" min="0" max="10" step="0.1" required />
+          </label>
+          <div class="row">
+            <button class="btn primary" type="submit">Add</button>
+            <button class="btn" type="reset">Reset</button>
+          </div>
+          <p id="formError" class="error" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Danh sách sinh viên</h2>
+        
+        <!-- Search Feature by Tâm -->
+        <div class="search-container">
+          <div class="search-box">
+            <input 
+              type="text" 
+              id="searchInput" 
+              class="search-input"
+              placeholder="Nhập mã sinh viên, họ tên hoặc lớp để tìm kiếm..."
+              autocomplete="off"
+            />
+            <button id="clearSearch" class="btn" type="button">Xóa</button>
+          </div>
+
+          <!-- Filter chips để tìm theo từng trường cụ thể -->
+          <div class="search-filters">
+            <button class="filter-chip active" data-filter="all">Tất cả</button>
+            <button class="filter-chip" data-filter="id">Mã SV</button>
+            <button class="filter-chip" data-filter="name">Họ tên</button>
+            <button class="filter-chip" data-filter="class">Lớp</button>
+          </div>
+
+          <div id="searchStats" class="search-stats">
+            Hiển thị tất cả sinh viên
+          </div>
+          
+          <!-- Search Suggestions -->
+          <div id="searchSuggestions" class="suggestions-dropdown">
+            <!-- Suggestions sẽ được render ở đây -->
+          </div>
+        </div>
+
+        <!-- Advanced Search Panel - MR #2 by Tâm -->
+        <div class="advanced-search-panel" id="advancedPanel">
+          <div class="panel-header" id="panelHeader">
+            <h4>🔧 Tìm kiếm nâng cao</h4>
+            <button id="toggleAdvanced" class="btn-toggle">Thu gọn</button>
+          </div>
+          
+          <div class="advanced-filters">
+            <div class="filter-row">
+              <label>Khoảng điểm:</label>
+              <input type="number" id="minScore" placeholder="Từ" min="0" max="10" step="0.1">
+              <span>đến</span>
+              <input type="number" id="maxScore" placeholder="Đến" min="0" max="10" step="0.1">
+            </div>
+            
+            <div class="filter-row">
+              <label>Sắp xếp:</label>
+              <select id="sortBy">
+                <option value="">Mặc định</option>
+                <option value="name-asc">Tên A-Z</option>
+                <option value="name-desc">Tên Z-A</option>
+                <option value="score-asc">Điểm thấp-cao</option>
+                <option value="score-desc">Điểm cao-thấp</option>
+                <option value="id-asc">Mã SV A-Z</option>
+              </select>
+            </div>
+            
+            <div class="filter-row">
+              <button id="applyFilters" class="btn primary">Áp dụng</button>
+              <button id="resetFilters" class="btn">Reset</button>
+              <button id="exportResults" class="btn secondary">📄 Export CSV</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search History Panel -->
+        <div class="search-history-panel">
+          <div class="history-header">
+            <span>🕐 Lịch sử tìm kiếm</span>
+            <button id="clearHistory" class="btn-small">Xóa</button>
+          </div>
+          <div id="searchHistoryList" class="history-list">
+            <!-- History items sẽ được render ở đây -->
+          </div>
+        </div>
+        
+        <div class="tableWrap">
+          <table class="table" id="studentTable">
+            <thead>
+              <tr>
+                <th>Mã</th>
+                <th>Họ tên</th>
+                <th>Lớp</th>
+                <th>Điểm</th>
+              </tr>
+            </thead>
+            <tbody id="studentTbody"></tbody>
+          </table>
+        </div>
+        
+        <!-- No results message -->
+        <div id="noResults" class="no-results" style="display: none;">
+          <p>Không tìm thấy sinh viên phù hợp với từ khóa "<span id="searchTerm"></span>"</p>
+          <p>Hãy thử tìm kiếm với từ khóa khác.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">CC_T2 - BaiTap3</footer>
+    <script src="app.js"></script>
+  </body>
+</html>
