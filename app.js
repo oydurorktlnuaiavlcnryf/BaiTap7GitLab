@@ -46,6 +46,20 @@ function render(list = students) {
 function setupAddForm() {
   const form = $("studentForm");
   const errorEl = $("formError");
+  const formSection = $("formSection");
+  const showFormBtn = $("showFormBtn");
+  const hideFormBtn = $("hideFormBtn");
+
+  showFormBtn.addEventListener("click", () => {
+    formSection.style.display = "block";
+    formSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  hideFormBtn.addEventListener("click", () => {
+    formSection.style.display = "none";
+    form.reset();
+    errorEl.textContent = "";
+  });
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -68,6 +82,7 @@ function setupAddForm() {
     students.push(st);
     saveStudents();
     form.reset();
+    formSection.style.display = "none";
     render();
   });
 }
@@ -97,16 +112,16 @@ function setupSearch() {
 }
 
 function applyTheme(theme) {
-  if (theme === "light") document.documentElement.setAttribute("data-theme", "light");
+  if (theme === "dark") document.documentElement.setAttribute("data-theme", "dark");
   else document.documentElement.removeAttribute("data-theme");
 }
 
 function setupTheme() {
-  const saved = localStorage.getItem(THEME_KEY) || "dark";
+  const saved = localStorage.getItem(THEME_KEY) || "light";
   applyTheme(saved);
 
   $("themeToggle").addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+    const current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
     const next = current === "light" ? "dark" : "light";
     localStorage.setItem(THEME_KEY, next);
     applyTheme(next);
