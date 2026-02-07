@@ -35,8 +35,8 @@ function render(list = students) {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${st.id}</td>
-      <td>${st.name}</td>
       <td>${st.className}</td>
+      <td>${st.name}</td>
       <td>${st.score.toFixed(1)}</td>
     `;
     tbody.appendChild(tr);
