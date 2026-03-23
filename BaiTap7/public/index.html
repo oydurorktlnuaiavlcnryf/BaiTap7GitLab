@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CI/CD Pipeline Demo - BaiTap7 CCMTPTPM - Continuous Integration & Continuous Deployment với GitLab">
+    <title>CI/CD Pipeline Demo - BaiTap7</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header id="header">
+            <div class="header-badge">
+                <span class="badge-icon">⚡</span>
+                <span>GitLab CI/CD</span>
+            </div>
+            <h1>CI/CD Pipeline <span class="gradient-text">Demo</span></h1>
+            <p class="subtitle">BaiTap7 — Công cụ & Mô hình Triển khai Phần mềm</p>
+            <p class="subtitle-sm">MSSV: 2280614642 — Trần Biên Minh Tâm</p>
+        </header>
+
+        <main>
+            <!-- Pipeline Status -->
+            <section class="card card-glow" id="pipeline-status">
+                <div class="card-header">
+                    <div class="card-icon">🚀</div>
+                    <h2>Pipeline Status</h2>
+                </div>
+                <div class="pipeline-visual">
+                    <div class="pipeline-stage completed" data-stage="1">
+                        <div class="stage-icon">🔨</div>
+                        <div class="stage-label">Build</div>
+                        <div class="stage-status">passed</div>
+                    </div>
+                    <div class="pipeline-connector active"></div>
+                    <div class="pipeline-stage completed" data-stage="2">
+                        <div class="stage-icon">🧪</div>
+                        <div class="stage-label">Test</div>
+                        <div class="stage-status">passed</div>
+                    </div>
+                    <div class="pipeline-connector active"></div>
+                    <div class="pipeline-stage completed" data-stage="3">
+                        <div class="stage-icon">🌐</div>
+                        <div class="stage-label">Deploy</div>
+                        <div class="stage-status">passed</div>
+                    </div>
+                </div>
+                <div class="status-badge-wrapper">
+                    <div class="status-badge passed">
+                        <span class="pulse-dot"></span>
+                        <span>ALL STAGES PASSED</span>
+                    </div>
+                </div>
+                <p class="card-desc">Pipeline tự động chạy khi push code lên branch <code>main</code>. Gồm 3 stages: <strong>Build → Test → Deploy</strong>.</p>
+            </section>
+
+            <!-- CI/CD Concepts -->
+            <section class="card" id="cicd-concepts">
+                <div class="card-header">
+                    <div class="card-icon">📘</div>
+                    <h2>Khái niệm CI/CD</h2>
+                </div>
+                <div class="concept-grid">
+                    <div class="concept-card ci-card">
+                        <div class="concept-icon">🔄</div>
+                        <h3>CI — Continuous Integration</h3>
+                        <p>Tự động <strong>build</strong> và <strong>test</strong> mỗi khi developer push code. Giúp phát hiện lỗi sớm, giảm conflict khi merge.</p>
+                        <ul class="feature-list">
+                            <li>Auto build on every push</li>
+                            <li>Run automated tests</li>
+                            <li>Code quality checks</li>
+                        </ul>
+                    </div>
+                    <div class="concept-card cd-card">
+                        <div class="concept-icon">🚀</div>
+                        <h3>CD — Continuous Deployment</h3>
+                        <p>Sau khi CI pass, tự động <strong>deploy</strong> phiên bản mới lên staging/production. Release nhanh, giảm thủ công.</p>
+                        <ul class="feature-list">
+                            <li>Automatic deployment</li>
+                            <li>Zero-downtime releases</li>
+                            <li>Rollback capabilities</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pipeline Flow -->
+            <section class="card" id="pipeline-flow">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <h2>Pipeline Flow</h2>
+                </div>
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <div class="flow-number">1</div>
+                        <div class="flow-content">
+                            <strong>Commit & Push</strong>
+                            <span>Developer push code lên GitLab repository</span>
+                        </div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-number">2</div>
+                        <div class="flow-content">
+                            <strong>Pipeline Triggered</strong>
+                            <span>GitLab CI tự động kích hoạt dựa trên <code>.gitlab-ci.yml</code></span>
+                        </div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-number">3</div>
+                        <div class="flow-content">
+                            <strong>Build Stage</strong>
+                            <span>Kiểm tra cấu trúc project, compile code</span>
+                        </div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-number">4</div>
+                        <div class="flow-content">
+                            <strong>Test Stage</strong>
+                            <span>Chạy automated tests, kiểm tra HTML/CSS/JS</span>
+                        </div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-number">5</div>
+                        <div class="flow-content">
+                            <strong>Deploy Stage</strong>
+                            <span>Deploy lên GitLab Pages, site live tự động</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GitLab CI Concepts Table -->
+            <section class="card" id="gitlab-concepts">
+                <div class="card-header">
+                    <div class="card-icon">⚙️</div>
+                    <h2>GitLab CI/CD Components</h2>
+                </div>
+                <div class="table-wrapper">
+                    <table class="concepts-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Mô tả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>.gitlab-ci.yml</code></td>
+                                <td>File cấu hình pipeline bằng YAML, đặt ở root của repository. Đây là file duy nhất cần tạo để GitLab CI hoạt động.</td>
+                            </tr>
+                            <tr>
+                                <td><code>Pipeline</code></td>
+                                <td>Tập hợp toàn bộ các jobs được chạy khi trigger. Mỗi push tạo 1 pipeline mới.</td>
+                            </tr>
+                            <tr>
+                                <td><code>Stage</code></td>
+                                <td>Nhóm các jobs chạy song song. Thứ tự stages: <code>.pre</code> → stage1 → stage2 → <code>.post</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>Job</code></td>
+                                <td>Đơn vị nhỏ nhất trong pipeline, chứa <code>script</code>, <code>stage</code>, và <code>rules</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>Runner</code></td>
+                                <td>Server/container thực thi các jobs. GitLab.com cung cấp shared runners miễn phí.</td>
+                            </tr>
+                            <tr>
+                                <td><code>Artifacts</code></td>
+                                <td>Các file được jobs tạo ra, có thể chia sẻ giữa các stages/jobs (VD: build output).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- YAML Config Preview -->
+            <section class="card" id="yaml-config">
+                <div class="card-header">
+                    <div class="card-icon">📄</div>
+                    <h2>Cấu hình <code>.gitlab-ci.yml</code></h2>
+                </div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                        <span class="code-filename">.gitlab-ci.yml</span>
+                    </div>
+                    <pre><code><span class="yaml-key">stages:</span>
+  - <span class="yaml-value">build</span>
+  - <span class="yaml-value">test</span>
+  - <span class="yaml-value">deploy</span>
+
+<span class="yaml-key">build:</span>
+  <span class="yaml-key">stage:</span> <span class="yaml-value">build</span>
+  <span class="yaml-key">script:</span>
+    - <span class="yaml-string">echo "Building project..."</span>
+    - <span class="yaml-string">ls -la public/</span>
+  <span class="yaml-key">artifacts:</span>
+    <span class="yaml-key">paths:</span>
+      - <span class="yaml-value">public/</span>
+
+<span class="yaml-key">test:</span>
+  <span class="yaml-key">stage:</span> <span class="yaml-value">test</span>
+  <span class="yaml-key">script:</span>
+    - <span class="yaml-string">test -f public/index.html</span>
+    - <span class="yaml-string">test -f public/styles.css</span>
+    - <span class="yaml-string">test -f public/js/main.js</span>
+
+<span class="yaml-key">pages:</span>
+  <span class="yaml-key">stage:</span> <span class="yaml-value">deploy</span>
+  <span class="yaml-key">script:</span>
+    - <span class="yaml-string">echo "Deploying to GitLab Pages..."</span>
+  <span class="yaml-key">artifacts:</span>
+    <span class="yaml-key">paths:</span>
+      - <span class="yaml-value">public</span>
+  <span class="yaml-key">rules:</span>
+    - <span class="yaml-key">if:</span> <span class="yaml-variable">$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Access Guide -->
+            <section class="card" id="access-guide">
+                <div class="card-header">
+                    <div class="card-icon">🔗</div>
+                    <h2>Truy cập CI/CD trên GitLab</h2>
+                </div>
+                <div class="access-grid">
+                    <div class="access-item">
+                        <span class="access-label">📋 Xem Pipelines</span>
+                        <code>Repository → CI/CD → Pipelines</code>
+                    </div>
+                    <div class="access-item">
+                        <span class="access-label">🔧 Xem Jobs</span>
+                        <code>Repository → CI/CD → Jobs</code>
+                    </div>
+                    <div class="access-item">
+                        <span class="access-label">✏️ Pipeline Editor</span>
+                        <code>Repository → CI/CD → Editor</code>
+                    </div>
+                    <div class="access-item">
+                        <span class="access-label">🌐 Pages Settings</span>
+                        <code>Settings → Pages</code>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Q&A Section -->
+            <section class="card" id="qa-section">
+                <div class="card-header">
+                    <div class="card-icon">❓</div>
+                    <h2>Câu hỏi ôn tập</h2>
+                </div>
+                <div class="qa-list">
+                    <div class="qa-item">
+                        <button class="qa-question" onclick="toggleAnswer(this)">
+                            <span>Câu 1: CI khác CD chỗ nào?</span>
+                            <span class="qa-toggle">+</span>
+                        </button>
+                        <div class="qa-answer">
+                            <p><strong>CI (Continuous Integration)</strong> tập trung vào việc tự động <em>build</em> và <em>test</em> mỗi khi có thay đổi code. <strong>CD (Continuous Deployment)</strong> mở rộng CI bằng cách tự động <em>deploy</em> phiên bản đã pass CI lên môi trường staging/production.</p>
+                        </div>
+                    </div>
+                    <div class="qa-item">
+                        <button class="qa-question" onclick="toggleAnswer(this)">
+                            <span>Câu 2: Runner là gì? Ai cung cấp runner?</span>
+                            <span class="qa-toggle">+</span>
+                        </button>
+                        <div class="qa-answer">
+                            <p>Runner là <strong>server/container</strong> thực thi các jobs trong pipeline. GitLab.com cung cấp <strong>shared runners</strong> miễn phí, không cần cài đặt riêng. Ngoài ra có thể tự cài đặt <strong>self-hosted runners</strong>.</p>
+                        </div>
+                    </div>
+                    <div class="qa-item">
+                        <button class="qa-question" onclick="toggleAnswer(this)">
+                            <span>Câu 3: Artifacts dùng để làm gì?</span>
+                            <span class="qa-toggle">+</span>
+                        </button>
+                        <div class="qa-answer">
+                            <p>Artifacts là các <strong>file được jobs tạo ra</strong> và có thể chia sẻ giữa các jobs/stages. VD: build output từ job <code>build</code> có thể được job <code>deploy</code> sử dụng.</p>
+                        </div>
+                    </div>
+                    <div class="qa-item">
+                        <button class="qa-question" onclick="toggleAnswer(this)">
+                            <span>Câu 4: Pipeline fail ở stage test, stage deploy có chạy không?</span>
+                            <span class="qa-toggle">+</span>
+                        </button>
+                        <div class="qa-answer">
+                            <p><strong>Không.</strong> Stages chạy tuần tự. Nếu 1 stage fail, các stage sau sẽ <strong>không được thực thi</strong>. Điều này đảm bảo code lỗi không bao giờ được deploy.</p>
+                        </div>
+                    </div>
+                    <div class="qa-item">
+                        <button class="qa-question" onclick="toggleAnswer(this)">
+                            <span>Câu 5: Làm sao để pipeline chỉ chạy trên branch main?</span>
+                            <span class="qa-toggle">+</span>
+                        </button>
+                        <div class="qa-answer">
+                            <p>Dùng <code>rules</code> trong job:</p>
+                            <pre><code>rules:
+  - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH</code></pre>
+                        </div>
+                    </div>
+                    <div class="qa-item">
+                        <button class="qa-question" onclick="toggleAnswer(this)">
+                            <span>Câu 6: Muốn chạy pipeline trên mọi branch?</span>
+                            <span class="qa-toggle">+</span>
+                        </button>
+                        <div class="qa-answer">
+                            <p>Bỏ <code>rules</code> hoặc dùng:</p>
+                            <pre><code>rules:
+  - if: $CI_COMMIT_BRANCH</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Deploy Info -->
+            <section class="card card-accent" id="deploy-info">
+                <div class="card-header">
+                    <div class="card-icon">📡</div>
+                    <h2>Thông tin Deploy</h2>
+                </div>
+                <div class="deploy-grid">
+                    <div class="deploy-item">
+                        <span class="deploy-label">Last Updated</span>
+                        <span class="deploy-value" id="timestamp">Loading...</span>
+                    </div>
+                    <div class="deploy-item">
+                        <span class="deploy-label">Pipeline</span>
+                        <span class="deploy-value" id="pipeline-id">#latest</span>
+                    </div>
+                    <div class="deploy-item">
+                        <span class="deploy-label">Status</span>
+                        <span class="deploy-value status-green">● Deployed</span>
+                    </div>
+                    <div class="deploy-item">
+                        <span class="deploy-label">Branch</span>
+                        <span class="deploy-value">main</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>BaiTap7 — Continuous Integration & Continuous Deployment</p>
+            <p class="footer-sub">MSSV: 2280614642 — Trần Biên Minh Tâm | Deployed via GitLab Pages</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

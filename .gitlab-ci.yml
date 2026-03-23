@@ -1,0 +1,63 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - echo "========================================="
+    - echo "  BUILDING PROJECT - BaiTap7 CI/CD Demo"
+    - echo "========================================="
+    - echo "Build started at: $(date)"
+    - echo "Checking project structure..."
+    - ls -la BaiTap7/public/
+    - echo "Copying public files to root..."
+    - cp -r BaiTap7/public/ public/
+    - echo "Build completed successfully!"
+    - echo "Build finished at: $(date)"
+  artifacts:
+    paths:
+      - public/
+    expire_in: 1 day
+
+test:
+  stage: test
+  script:
+    - echo "========================================="
+    - echo "  RUNNING TESTS - BaiTap7 CI/CD Demo"
+    - echo "========================================="
+    - echo "Test started at: $(date)"
+    - echo "Checking HTML file..."
+    - test -f public/index.html && echo "✅ index.html exists" || exit 1
+    - echo "Checking CSS file..."
+    - test -f public/styles.css && echo "✅ styles.css exists" || exit 1
+    - echo "Checking JS file..."
+    - test -f public/js/main.js && echo "✅ main.js exists" || exit 1
+    - echo "Validating HTML structure..."
+    - grep -q "<html" public/index.html && echo "✅ Valid HTML structure" || exit 1
+    - grep -q "<head>" public/index.html && echo "✅ Head section found" || exit 1
+    - grep -q "<body>" public/index.html && echo "✅ Body section found" || exit 1
+    - echo "All tests passed!"
+    - echo "Test finished at: $(date)"
+
+pages:
+  stage: deploy
+  script:
+    - echo "========================================="
+    - echo "  DEPLOYING TO GITLAB PAGES"
+    - echo "========================================="
+    - echo "Deploy started at: $(date)"
+    - echo "Deploying static site from public/ directory..."
+    - echo "Files to deploy:"
+    - find public/ -type f
+    - echo "Deployment completed successfully!"
+    - echo "Deploy finished at: $(date)"
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 day
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == "develop"
+    - if: $CI_COMMIT_BRANCH == "main"
