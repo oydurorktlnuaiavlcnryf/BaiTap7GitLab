@@ -1,0 +1,58 @@
+name: Manual Deploy Only
+
+# Bài tập thêm #3: Chỉ chạy deploy khi bấm nút thủ công
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deploy environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+jobs:
+  deploy:
+    name: 🚀 Manual Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment }}
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Prepare deployment
+        run: |
+          echo "========================================="
+          echo "  MANUAL DEPLOY - ${{ github.event.inputs.environment }}"
+          echo "========================================="
+          echo "Triggered by: ${{ github.actor }}"
+          echo "Deploy started at: $(date)"
+          mkdir -p _site
+          cp -r BaiTap7/public/* _site/
+          echo "Files to deploy:"
+          find _site/ -type f
+          echo "Deployment prepared!"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Deployment complete
+        run: |
+          echo "✅ Deployment to ${{ github.event.inputs.environment }} completed!"
+          echo "Finished at: $(date)"
